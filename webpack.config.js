@@ -13,7 +13,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   // 源文件路径为 /src/index.html
   template: path.join(__dirname, './src/index.html'),
   // 生成内存首页文件 名为 index.html
-  filename: 'index.html'
+  filename: 'index.html',
 });
 
 module.exports = {
@@ -24,7 +24,20 @@ module.exports = {
   mode: 'development',
   // 使用插件
   plugins: [
-    htmlWebpackPlugin
-  ]
-}
-
+    htmlWebpackPlugin,
+  ],
+  devServer: {
+    host: '127.0.0.1',
+    port: 3000,
+    hot: true,
+    open: true,
+  },
+  resolve: {
+    // 省略 import 对象扩展名
+    extensions: ['.js', '.jsx', '.json'],
+    // 配置项目根路径用 @ 表示
+    alias: {
+      '@': path.join(__dirname, './src'),
+    },
+  },
+};
